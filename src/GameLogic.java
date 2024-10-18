@@ -4,19 +4,32 @@ public class GameLogic {
     public static char[] hiddenWord;
 
     public static void guessChar(String givenWord){
+
         Scanner sc = new Scanner(System.in);
 
+        boolean validInput = false;
+        char guessOfPlayer = ' ';
 
-        System.out.println("Введите букву: ");
-        char guessOfPlayer = sc.next().charAt(0);
+        while (!validInput) {
+            System.out.println("Введите букву: ");
+            String input = sc.nextLine();
+            if (input.length() == 1){
+                guessOfPlayer = input.charAt(0);
+                if (Character.isLetter(guessOfPlayer)){
+                    validInput = true; // правильный ввод буквы
+                } else {
+                    System.out.println("Введите букву а не цифру");
+                }
+            }
+            else {
+                System.out.println("Введите только 1 символ! ");
+            }
+        }
+
         char[] givenWordInArr = givenWord.toCharArray();
         boolean isCorrect = false;
 
-        if (hiddenWord == null) {
-            char[] hiddenWord = new char[givenWord.length()];
-            // Заполняем подчеркиваниями
-            Arrays.fill(hiddenWord, '_');
-        }
+
         for (int i = 0; i < givenWordInArr.length; i++) {
             if (givenWordInArr[i] == guessOfPlayer) {
                 hiddenWord[i] = guessOfPlayer;

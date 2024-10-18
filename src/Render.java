@@ -6,13 +6,23 @@ public class Render {
 
         while (!gameIsOver) {
             System.out.println("Здравствуйте, хотите сыграть в игру?");
-            char chosePlayer = scan.next().charAt(0);
 
-            if (chosePlayer == 'Y') {
-                System.out.println("Давай");
-            } else if (chosePlayer == 'N') {
-                System.out.println("Нет, спасибо");
-                gameIsOver = true;
+            char chosePlayer = scan.next().charAt(0);
+            boolean chosePlayerCorrect = false;
+
+            while (!chosePlayerCorrect) {
+                if (chosePlayer == 'Y'  || chosePlayer == 'y') {
+                    System.out.println("Давай");
+                    chosePlayerCorrect = true;
+                } else if (chosePlayer == 'N' || chosePlayer == 'n') {
+                    System.out.println("Нет, спасибо");
+                    gameIsOver = true;
+                    chosePlayerCorrect = true;
+                    //break;
+                } else {
+                    System.out.println("Нет такого варината, попробуйте снова: ");
+                    chosePlayer = scan.next().charAt(0);
+                }
             }
 
             // Загаданное слово
